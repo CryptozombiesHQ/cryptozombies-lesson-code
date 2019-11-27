@@ -4,7 +4,7 @@
 
 
 ## Overview
-This repository contains source codes for [Cryptozombies](cryptozombies.io/en/) lessons.
+This repository contains source codes for [Cryptozombies](https://cryptozombies.io/en/) lessons.
 
 The source codes are divided into `courses` and `chapters` as folders and chapters contain Solidity sample codes for each `lesson`.
 
