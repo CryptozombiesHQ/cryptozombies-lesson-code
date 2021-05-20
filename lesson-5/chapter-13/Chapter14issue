@@ -1,0 +1,3 @@
+https://cryptozombies.io/en/lesson/5/chapter/14
+
+in the above link "Wrapping up" Whenever you pick a certain zombie and attempt to rename it, it will duplicate it instead. Fairly sure this is a problem with the web3.js or your website. Plus the one you actually click on sometimes doesnt rename!
