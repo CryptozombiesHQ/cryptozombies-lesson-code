@@ -1,22 +1,37 @@
-async function increase(duration) {
+// new function: custom_sendAsync
+function custom_sendAsync(the_method, the_params){
+    return new Promise((resolve, reject) => {
+        
+        web3.currentProvider.send({
+            jsonrpc: "2.0",
+            method: the_method,
+            params: the_params,
+            id: new Date().getTime()
+        }, (err, resp) => {
+            if(!err){
+                resolve(resp);
+            }
+            else reject();
+        });
 
-    //first, let's increase time
-    await web3.currentProvider.sendAsync({
-        jsonrpc: "2.0",
-        method: "evm_increaseTime",
-        params: [duration], // there are 86400 seconds in a day
-        id: new Date().getTime()
-    }, () => {});
+    })
+    /* uncomment if you want to catch it here
+    .catch((caught)=>{
+        return(caught);
+    });
+    */
+};
+
+// use 'increase' as normal here:
+async function increase(duration_value) {
+
+    // first, let's increase time
+    await custom_sendAsync("evm_increaseTime", [duration_value]);
 
     //next, let's mine a new block
-    web3.currentProvider.send({
-        jsonrpc: '2.0',
-        method: 'evm_mine',
-        params: [],
-        id: new Date().getTime()
-    })
+    await custom_sendAsync("evm_mine", []);
 
-}
+};
 
 const duration = {
 
