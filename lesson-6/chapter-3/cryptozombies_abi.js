@@ -269,6 +269,7 @@ var cryptoZombiesABI = [
       "stateMutability": "view",
       "type": "function"
     },
+    {
       "constant": false,
       "inputs": [
         {
