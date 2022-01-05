@@ -269,6 +269,7 @@ var cryptoZombiesABI = [
       "stateMutability": "view",
       "type": "function"
     },
+    {
       "constant": false,
       "inputs": [
         {
@@ -438,4 +439,3 @@ var cryptoZombiesABI = [
       "type": "event"
     }
   ]
-  
