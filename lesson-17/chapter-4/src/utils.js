@@ -27,7 +27,16 @@ async function initAccount(rinkebyWallet, zkSyncProvider, zksync)
     return zkSyncWallet;
 }
 
-async function registerAccount (wallet) {
+async function registerAccount (wallet)
+{
   console.log(`Registering the ${wallet.address()} account on zkSync`)
-  // Start here
+  if(!await wallet.isSigningKeySet())
+  {
+      if (await wallet.getAccountId() === undefined)
+      {
+        throw new Error('Unknown account')
+      }
+      const changePubkey = await wallet.setSigningKey();
+      await changePubkey.awaitReceipt();
+  }
 }
