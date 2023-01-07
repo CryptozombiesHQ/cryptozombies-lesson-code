@@ -21,4 +21,8 @@ async function getEthereumProvider (ethers, networkName) {
   return ethersProvider
 }
 
-// Start here
+async function initAccount(rinkebyWallet, zkSyncProvider, zksync)
+{
+    const zkSyncWallet = await zksync.Wallet.fromEthSigner(rinkebyWallet, zkSyncProvider);
+    return zkSyncWallet;
+}
