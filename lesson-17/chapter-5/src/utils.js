@@ -41,4 +41,17 @@ async function registerAccount (wallet)
   }
 }
 
-// Start here
+async function depositToZkSync(zkSyncWallet, token, amountToDeposit, ethers)
+{
+    const deposit = await zkSyncWallet.depositToSyncFromEthereum({
+        depositTo: zkSyncWallet.address(),
+        token: token,
+        amount: ethers.utils.parseEther(amountToDeposit)
+      });
+    try {
+        await deposit.awaitReceipt();
+    } catch (error) {
+        console.log('Error while awaiting confirmation from the zkSync operators.');
+        console.log(error);
+    }
+}
