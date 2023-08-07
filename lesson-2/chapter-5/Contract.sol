@@ -29,11 +29,43 @@ contract ZombieFactory {
         return rand % dnaModulus;
     }
 
-    function createRandomZombie(string _name) public {
-        require(ownerZombieCount[msg.sender] == 0);
-        uint randDna = _generateRandomDna(_name);
-        _createZombie(_name, randDna);
+   function createRandomZombie(string memory _name) public {
+    require(ownerZombieCount[msg.sender] == 0);
+    uint randDna = _generateRandomDna(_name);
+
+    // Check if the generated DNA is already used by an existing zombie
+    bool isDnaUnique = true;
+    for (uint i = 0; i < zombies.length; i++) {
+        if (zombies[i].dna == randDna) {
+            isDnaUnique = false;
+            break;
+        }
     }
+
+    if (!isDnaUnique) {
+        // Keep generating a new randDna until it is unique
+        while (!isDnaUnique) {
+            randDna = _generateRandomDna(_name);
+            isDnaUnique = true;
+            for (uint i = 0; i < zombies.length; i++) {
+                if (zombies[i].dna == randDna) {
+                    isDnaUnique = false;
+                    break;
+                }
+            }
+        }
+    } else {
+        // The initial randDna is already unique, no need to re-generate
+    }
+
+    randDna = randDna - randDna % 100;
+    _createZombie(_name, randDna);
+}
+
+
+    
+}
+
 
 }
 contract ZombieFeeding is ZombieFactory {
