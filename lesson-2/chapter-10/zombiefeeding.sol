@@ -1,7 +1,5 @@
 pragma solidity ^0.4.25;
-
 import "./zombiefactory.sol";
-
 interface KittyInterface {
   function getKitty(uint256 _id) external view returns (
     bool isGestating,
